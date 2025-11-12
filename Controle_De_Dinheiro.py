@@ -5,18 +5,22 @@ from time import sleep
 depositos = []
 saques = []
 valor_conta = 0
+cofrinho = 0
 def Mostrar_Menu():
-        print()
+        print('-='*20)
         print('''[1] Nova transação
 [2] Ver saldo
 [3] Ver transações
-[4] Sair         
+[4] Adicionar ao Cofrinho
+[5] Ver saldo do cofrinho
+[6] Sair         
 ''')
+
 def escolher_opcao():
       while True:
             try:
                 opcao = int(input('Digite sua opção: '))
-                if opcao in [1,2,3,4]:
+                if opcao in [1,2,3,4,5,6]:
                     return opcao
                 else:
                     print('Erro! Digite um valor válido')
@@ -40,7 +44,7 @@ while True:
     opcao = escolher_opcao()
     if opcao == 1:
         tipo = escolher_tipo_transacao()
-        valor = float(input('Digite o valor: '))
+        valor = float(input('Digite o valor: R$'))
         try:    
             if tipo == 1:
                 valor_conta += valor
@@ -68,9 +72,12 @@ while True:
                 continue
         except:
             print('Houve um erro, o programa voltará do inicio.')
-            continue    
+            continue
+
     elif opcao == 2:
-        print(f'Seu saldo atual é de R${valor_conta}')
+        print(f'Seu saldo atual é de R${valor_conta:.2f}')
+        continue
+
     elif opcao == 3:
         print('[1] Para ver depositos \n[2] Para ver saques \n[3] Para voltar ao menu')
         opcao_transacoes = int(input('Escolha:'))
@@ -90,8 +97,27 @@ while True:
                     print(f'Data: {transacao['data']} | Valor: {transacao['valor']}')
         elif opcao_transacoes == 3:
             continue
+
     elif opcao == 4:
+        valor_cofrinho = float(input('Quanto deseja adicionar ao cofrinho? R$'))
+        print('CONFIRMANDO...')
+        sleep(1.5)
+        if valor_cofrinho <= valor_conta:
+            cofrinho += valor_cofrinho
+            valor_conta -= valor_cofrinho
+            print('Valor adicionado com sucesso.')
+            continue
+        else:
+            print('Você não possui esse valor na sua conta.')
+            continue
+
+    elif opcao == 5:
+        print(f'Você possui R${cofrinho} no seu cofrinho')
+        continue
+
+    elif opcao == 6:
         print('Saindo...')
         sleep(2)   
         break
+
 print('Programa finalizado')
