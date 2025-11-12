@@ -1,4 +1,4 @@
-# Carteira Pessoal
+# Gestor Financeiro
 
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 
@@ -8,7 +8,7 @@ Um projeto de console em Python para controle financeiro pessoal. O foco atual �
 
 ## 🎯 Objetivo Principal
 
-O objetivo é criar uma ferramenta simples para que o usuário possa anotar e monitorar suas transações financeiras (entradas e gastos), ajudando no controle do orçamento pessoal.
+O objetivo é criar uma ferramenta simples para que o usuário possa anotar e monitorar suas transações financeiras (entradas e gastos), ajudando no controle do orçamento pessoal, desde criar um cofrinho até gerar gráficos com coletas de dados
 
 ---
 
