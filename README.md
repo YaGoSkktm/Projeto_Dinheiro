@@ -16,10 +16,11 @@ O objetivo é criar uma ferramenta simples para que o usuário possa anotar e mo
 
 Este projeto é um campo de aprendizado e está em constante evolução. O plano é adicionar as seguintes funcionalidades:
 
-* **Histórico de Transações:** Implementar a funcionalidade de listar todas as transações realizadas.
-* **Persistência de Dados:** Salvar as transações e o saldo em um arquivo (ex: **JSON**), para que os dados não sejam perdidos ao fechar o programa.
-* **Análise de Dados:** Utilizar a biblioteca **Pandas** para ler os dados salvos e, futuramente, gerar relatórios ou gráficos simples sobre os gastos.
-* **Interface Web:** Criar uma interface de usuário mais amigável e visual utilizando o framework **Flask**.
+* **Histórico de Transações:** Implementar a funcionalidade de listar todas as transações realizadas. (feito ✅)
+* **Sistema de cofrinho com metas ou emegência:** Implementar funcionalidade de criar até 3 cofrinhos, com metas para bater (Em desenvolvimento 🛠️)
+* **Persistência de Dados:** Salvar as transações e o saldo em um arquivo (ex: **JSON**), para que os dados não sejam perdidos ao fechar o programa. (Será desenvolvido ⏳)
+* **Análise de Dados:** Utilizar a biblioteca **Pandas** para ler os dados salvos e, futuramente, gerar relatórios ou gráficos simples sobre os gastos. (Será desenvolvido ⏳)
+* **Interface Web:** Criar uma interface de usuário mais amigável e visual utilizando o framework **Flask**. (Será desenvolvido ⏳)
 
 ---
 
