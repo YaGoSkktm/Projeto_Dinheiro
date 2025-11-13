@@ -1,32 +1,40 @@
 from datetime import datetime
-data_atual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
+data_atual = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+#import json
+#import pandas
+#import flask
+#banco de dados
 from time import sleep
 depositos = []
 saques = []
+cofrinho = []
 valor_conta = 0
 cofrinho = 0
 def Mostrar_Menu():
-        print('-='*20)
-        print('''[1] Nova transação
-[2] Ver saldo
-[3] Ver transações
-[4] Adicionar ao Cofrinho
-[5] Ver saldo do cofrinho
-[6] Sair         
+    print('-=' * 25)
+    print(f'{"MENU PRINCIPAL":^50}')
+    print('-=' * 25)
+    print('''
+[1] Nova transação        ||  [5] Ver saldo do cofrinho
+[2] Ver saldo		  ||  [6] Adicionar ao Cofrinho
+[3] Ver transações        ||  [7] Retirar do Cofrinho
+[4] Criar Cofrinho        ||  [8] Sair 
 ''')
+    print('-=' * 25)
 
 def escolher_opcao():
       while True:
             try:
                 opcao = int(input('Digite sua opção: '))
-                if opcao in [1,2,3,4,5,6]:
+                if opcao in [1,2,3,4,5,6,7,8]:
                     return opcao
                 else:
                     print('Erro! Digite um valor válido')
             except ValueError:
                 print('Erro! Digite apenas números.')
             continue
+      
+
 def escolher_tipo_transacao():
     print('[1] Para Adicionar \n[2] Para retirar')
     opcao_transacao = int(input('Escolha sua opção: '))
@@ -38,6 +46,11 @@ def escolher_tipo_transacao():
     except ValueError:
         print('Erro! Digite apenas Números.')
      
+
+#def criando_cofrinho():
+#    criacao = {'Nome:'}
+    
+
 
 while True:
     Mostrar_Menu()
@@ -76,6 +89,7 @@ while True:
 
     elif opcao == 2:
         print(f'Seu saldo atual é de R${valor_conta:.2f}')
+        sleep(1)
         continue
 
     elif opcao == 3:
@@ -87,7 +101,7 @@ while True:
             else:
                 print('Esses foram seus depositos: ')
                 for itens in depositos:
-                    print(f'Data:{transacao['data']} | Valor: {transacao['valor']}')
+                    print(f'Data: {transacao['data']} | Valor: R${transacao['valor']:.2f}')
         elif opcao_transacoes == 2:
             if len(saques) == 0:
                 print('Você não possui saques')
@@ -114,8 +128,9 @@ while True:
     elif opcao == 5:
         print(f'Você possui R${cofrinho} no seu cofrinho')
         continue
-
-    elif opcao == 6:
+    #elif opcao == 6:
+        
+    elif opcao == 8:
         print('Saindo...')
         sleep(2)   
         break
