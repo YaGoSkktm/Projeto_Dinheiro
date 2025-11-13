@@ -34,6 +34,6 @@ Este projeto é um campo de aprendizado e está em constante evolução. O plano
 2.  Clone este repositório.
 3.  Navegue até a pasta do projeto e execute o script:
     ```bash
-    python Controle_De_Dinheiro.py
+    python Gestor_Financeiro.py
     ```
 ---
