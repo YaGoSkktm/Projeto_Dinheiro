@@ -1,5 +1,4 @@
 from datetime import datetime
-data_atual = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 #import json
 #import pandas
 #import flask
@@ -9,14 +8,14 @@ depositos = []
 saques = []
 cofrinho = []
 valor_conta = 0
-cofrinho = 0
+
 def Mostrar_Menu():
     print('-=' * 25)
     print(f'{"MENU PRINCIPAL":^50}')
     print('-=' * 25)
     print('''
 [1] Nova transação        ||  [5] Ver saldo do cofrinho
-[2] Ver saldo		  ||  [6] Adicionar ao Cofrinho
+[2] Ver saldo             ||  [6] Adicionar ao Cofrinho
 [3] Ver transações        ||  [7] Retirar do Cofrinho
 [4] Criar Cofrinho        ||  [8] Sair 
 ''')
@@ -37,7 +36,11 @@ def escolher_opcao():
 
 def escolher_tipo_transacao():
     print('[1] Para Adicionar \n[2] Para retirar')
-    opcao_transacao = int(input('Escolha sua opção: '))
+    try:
+        opcao_transacao = int(input('Escolha sua opção: '))
+    except ValueError:
+        print('Erro de valor')
+        
     try:
         if opcao_transacao in [1, 2]:
             return opcao_transacao
@@ -47,15 +50,19 @@ def escolher_tipo_transacao():
         print('Erro! Digite apenas Números.')
      
 
-#def criando_cofrinho():
-#    criacao = {'Nome:'}
-    
+def criando_cofrinho():
+    nome_cofre = str(input('Qual será o nome do seu cofrinho? ')).strip()
+    meta_cofre = float(input('Qual meta você quer definir para esse cofrinho? R$'))
+    valor_inicial_cofrinho = float(input('Qual valor inicial você deseja colocar no cofre? R$'))
+    criacao_cofrinho = {'nome': nome_cofre, 'meta': meta_cofre, 'valor': [valor_inicial_cofrinho]}
+    cofrinho.append(criacao_cofrinho)
 
 
 while True:
     Mostrar_Menu()
     opcao = escolher_opcao()
     if opcao == 1:
+        data_atual = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
         tipo = escolher_tipo_transacao()
         valor = float(input('Digite o valor: R$'))
         try:    
@@ -83,12 +90,12 @@ while True:
             else:
                 print('Houve um erro, o programa voltará do inicio.')
                 continue
-        except:
+        except ValueError:
             print('Houve um erro, o programa voltará do inicio.')
             continue
 
     elif opcao == 2:
-        print(f'Seu saldo atual é de R${valor_conta:.2f}')
+        print(f"Seu saldo atual é de R${valor_conta:.2f}")
         sleep(1)
         continue
 
@@ -101,38 +108,81 @@ while True:
             else:
                 print('Esses foram seus depositos: ')
                 for itens in depositos:
-                    print(f'Data: {transacao['data']} | Valor: R${transacao['valor']:.2f}')
+                    print(f"Data: {itens['data']} | Valor: R${itens['valor']:.2f}")
         elif opcao_transacoes == 2:
             if len(saques) == 0:
                 print('Você não possui saques')
             else:
                 print('Esses foram seus saques:')
                 for itens in saques:
-                    print(f'Data: {transacao['data']} | Valor: {transacao['valor']}')
+                    print(f"Data: {itens['data']} | Valor: {itens['valor']:.2f}")
         elif opcao_transacoes == 3:
             continue
 
     elif opcao == 4:
-        valor_cofrinho = float(input('Quanto deseja adicionar ao cofrinho? R$'))
-        print('CONFIRMANDO...')
-        sleep(1.5)
-        if valor_cofrinho <= valor_conta:
-            cofrinho += valor_cofrinho
-            valor_conta -= valor_cofrinho
-            print('Valor adicionado com sucesso.')
-            continue
+        print('Analisando...')
+        sleep(1.3)
+        if len(cofrinho) < 3:
+            criando_cofrinho()
         else:
-            print('Você não possui esse valor na sua conta.')
+            print('Você atingiu o limite de cofrinhos que pode ter. ')
             continue
-
-    elif opcao == 5:
-        print(f'Você possui R${cofrinho} no seu cofrinho')
-        continue
-    #elif opcao == 6:
         
+    elif opcao == 5:
+        for pos, itens in enumerate(cofrinho):
+            print(f"[{pos+1}] {itens['nome']}")
+
+        escolha_cofre_saldo = int(input("Qual cofrinho você deseja escolher? "))
+        indice_cofre_saldo = escolha_cofre_saldo - 1
+
+        if 0 <= indice_cofre_saldo < len(cofrinho):
+            cofre = cofrinho[indice_cofre_saldo]
+            print(f"O saldo do cofrinho {cofre['nome']} é R${sum(cofre['valor']):.2f}")
+        else:
+            print("Opção inválida.")
+            continue
+        
+    elif opcao == 6:
+        if len(cofrinho) > 0:
+            for pos, itens in enumerate(cofrinho):
+                print(f"[{pos+1}] {itens['nome']}")
+            escolha_adicionar_saldoCofre = int(input('Em qual cofre você deseja adicionar dinheiro? '))
+            indice_adicionar_cofre = escolha_adicionar_saldoCofre - 1
+
+            if 0 <= indice_adicionar_cofre < len(cofrinho):
+                adicionar_valor_cofrinho = float(input('Quanto deseja adicionar? R$'))
+                cofrinho[indice_adicionar_cofre]['valor'].append(adicionar_valor_cofrinho)  
+                print('Valor adicionado com sucesso!')
+            else:
+                print('Houve um erro!')
+                continue
+        else:
+            print('Você ainda não possui um cofrinho')
+
+
+    elif opcao == 7:
+        if len(cofrinho) > 0:
+            for pos, itens in enumerate(cofrinho):
+                print(f"[{pos+1}] {itens['nome']}")
+            escolha_remover_saldoCofre = int(input('Em qual cofre você deseja remover dinheiro? '))
+            indice_remover_cofre = escolha_remover_saldoCofre - 1
+
+            if 0 <= indice_remover_cofre < len(cofrinho) and sum(cofrinho[indice_remover_cofre]['valor']) > 0:
+                valor_remover = float(input("Quanto deseja retirar? R$"))
+
+                if valor_remover <= sum(cofrinho[indice_remover_cofre]['valor']):
+                    cofrinho[indice_remover_cofre]['valor'].append(-valor_remover)
+                    print('Valor removido com sucesso')
+                else:
+                    print('Você não possui saldo suficiente nesse cofrinho.')
+            else:
+                print('Opção invalida ou cofrinho sem saldo')
+        else:
+            print('Você ainda naõ possui um cofrinho')
+
     elif opcao == 8:
         print('Saindo...')
-        sleep(2)   
+        sleep(1.3)   
         break
 
 print('Programa finalizado')
