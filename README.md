@@ -41,5 +41,5 @@ Este projeto é um campo de aprendizado e está em constante evolução. O plano
     ```
 ---
 
-#Projeto temporiaramente parado!
+# Projeto temporiaramente parado!
 Preciso estudar POO para implementar o flask ou o django, pandas e Json. e depois preciso estudar os próprios módulos (provavelmente começarei por flask ou django)
