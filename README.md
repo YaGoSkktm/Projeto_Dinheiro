@@ -16,6 +16,8 @@ Mas o objetivo principal é criar uma forma de eu adicionar os conhecimentos que
 
 ## 🚀 Próximos Passos (RoadMap)
 
+## 🚀 Próximos Passos (RoadMap)
+
 Este projeto é um campo de aprendizado e está em constante evolução. O plano é adicionar as seguintes funcionalidades:
 
 - [x] **Histórico de Transações:** Implementar a funcionalidade de listar todas as transações realizadas.
