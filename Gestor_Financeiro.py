@@ -32,14 +32,14 @@ def escolher_opcao():
             except ValueError:
                 print('Erro! Digite apenas números.')
             continue
-    
+
 def escolher_tipo_transacao():
     print('[1] Para Adicionar \n[2] Para retirar')
     try:
         opcao_transacao = int(input('Escolha sua opção: '))
     except ValueError:
         print('Erro de valor')
-        
+
     try:
         if opcao_transacao in [1, 2]:
             return opcao_transacao
@@ -47,7 +47,7 @@ def escolher_tipo_transacao():
             print('Erro! Digite um valor válido.')
     except ValueError:
         print('Erro! Digite apenas Números.')
-     
+
 def criando_cofrinho():
     global valor_conta
     nome_cofre = str(input('Qual será o nome do seu cofrinho? ')).strip()
@@ -60,8 +60,8 @@ def criando_cofrinho():
         valor_conta -= valor_inicial_cofrinho
     criacao_cofrinho = {'nome': nome_cofre, 'meta': meta_cofre, 'valor': [valor_inicial_cofrinho]}
     cofrinho.append(criacao_cofrinho)
-          
-    
+         
+
 
 while True:
     Mostrar_Menu()
@@ -91,7 +91,7 @@ while True:
                     saques.append(transacao)
                     sleep(2)
                     print('Valor retirado com sucesso')
-                    
+
             else:
                 print('Houve um erro, o programa voltará do inicio.')
                 continue
@@ -132,7 +132,7 @@ while True:
         else:
             print('Você atingiu o limite de cofrinhos que pode ter. ')
             continue
-        
+
     elif opcao == 5:
         for pos, itens in enumerate(cofrinho):
             print(f"[{pos+1}] {itens['nome']}")
@@ -146,7 +146,7 @@ while True:
         else:
             print("Opção inválida.")
             continue
-        
+
     elif opcao == 6:
         if len(cofrinho) > 0:
             for pos, itens in enumerate(cofrinho):
