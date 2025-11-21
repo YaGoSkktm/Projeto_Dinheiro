@@ -35,18 +35,15 @@ def escolher_opcao():
 
 def escolher_tipo_transacao():
     print('[1] Para Adicionar \n[2] Para retirar')
-    try:
-        opcao_transacao = int(input('Escolha sua opção: '))
-    except ValueError:
-        print('Erro de valor')
-
-    try:
-        if opcao_transacao in [1, 2]:
-            return opcao_transacao
-        else:
-            print('Erro! Digite um valor válido.')
-    except ValueError:
-        print('Erro! Digite apenas Números.')
+    while True:
+        try:
+            opcao_transacao = int(input('Escolha sua opção: '))
+            if opcao_transacao in [1, 2]:
+                return opcao_transacao
+            else:
+                print('Erro! Digite um valor válido.')
+        except ValueError:
+            print('Erro! Digite apenas Números.')
 
 def criando_cofrinho():
     global valor_conta
@@ -60,7 +57,6 @@ def criando_cofrinho():
         valor_conta -= valor_inicial_cofrinho
     criacao_cofrinho = {'nome': nome_cofre, 'meta': meta_cofre, 'valor': [valor_inicial_cofrinho]}
     cofrinho.append(criacao_cofrinho)
-         
 
 
 while True:
@@ -99,10 +95,12 @@ while True:
             print('Houve um erro, o programa voltará do inicio.')
             continue
 
+
     elif opcao == 2:
         print(f"Seu saldo atual é de R${valor_conta:.2f}")
         sleep(1)
         continue
+
 
     elif opcao == 3:
         print('[1] Para ver depositos \n[2] Para ver saques \n[3] Para voltar ao menu')
@@ -124,6 +122,7 @@ while True:
         elif opcao_transacoes == 3:
             continue
 
+
     elif opcao == 4:
         print('Analisando...')
         sleep(1.3)
@@ -132,6 +131,7 @@ while True:
         else:
             print('Você atingiu o limite de cofrinhos que pode ter. ')
             continue
+
 
     elif opcao == 5:
         for pos, itens in enumerate(cofrinho):
@@ -147,6 +147,7 @@ while True:
             print("Opção inválida.")
             continue
 
+
     elif opcao == 6:
         if len(cofrinho) > 0:
             for pos, itens in enumerate(cofrinho):
@@ -156,7 +157,7 @@ while True:
 
             if 0 <= indice_adicionar_cofre < len(cofrinho):
                 adicionar_valor_cofrinho = float(input('Quanto deseja adicionar? R$'))
-                if adicionar_valor_cofrinho < valor_conta:
+                if adicionar_valor_cofrinho <= valor_conta:
                     cofrinho[indice_adicionar_cofre]['valor'].append(adicionar_valor_cofrinho)
                     valor_conta -= adicionar_valor_cofrinho
                     print('Valor adicionado com sucesso!')
@@ -168,6 +169,7 @@ while True:
         else:
             print('Você ainda não possui um cofrinho')
 
+
     elif opcao == 7:
         if len(cofrinho) > 0:
             for pos, itens in enumerate(cofrinho):
@@ -177,17 +179,18 @@ while True:
 
             if 0 <= indice_remover_cofre < len(cofrinho) and sum(cofrinho[indice_remover_cofre]['valor']) > 0:
                 valor_remover = float(input("Quanto deseja retirar? R$"))
-                valor_conta += valor_remover
 
                 if valor_remover <= sum(cofrinho[indice_remover_cofre]['valor']):
                     cofrinho[indice_remover_cofre]['valor'].append(-valor_remover)
+                    valor_conta += valor_remover
                     print('Valor retirado com sucesso')
                 else:
                     print('Você não possui saldo suficiente nesse cofrinho.')
             else:
                 print('Opção invalida ou cofrinho sem saldo')
         else:
-            print('Você ainda naõ possui um cofrinho')
+            print('Você ainda não possui um cofrinho')
+
 
     elif opcao == 8:
         print('Saindo...')
